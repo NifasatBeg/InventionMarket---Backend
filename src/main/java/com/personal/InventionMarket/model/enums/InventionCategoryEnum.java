@@ -1,0 +1,20 @@
+package com.personal.InventionMarket.model.enums;
+
+public enum InventionCategoryEnum {
+    TECHNOLOGY,
+    HEALTHCARE,
+    MANUFACTURING,
+    FINANCE,
+    EDUCATION,
+    ENERGY,
+    RETAIL,
+    TRANSPORTATION,
+    AGRICULTURE,
+    CONSTRUCTION,
+    TELECOMMUNICATION,
+    MEDIA_ENTERTAINMENT,
+    AEROSPACE,
+    BIOTECHNOLOGY,
+    ENVIRONMENTAL_SCIENCE
+
+}
