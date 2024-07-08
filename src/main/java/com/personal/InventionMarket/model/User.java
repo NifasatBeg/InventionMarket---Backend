@@ -1,7 +1,7 @@
 package com.personal.InventionMarket.model;
 
 import com.personal.InventionMarket.model.enums.InventionCategoryEnum;
-import com.personal.InventionMarket.model.enums.InventorRoleEnum;
+import com.personal.InventionMarket.model.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @UuidGenerator
@@ -34,9 +35,11 @@ public class User {
     @Column(unique = true)
     private String phone;
 
-    @Column(nullable = false)
+    @ElementCollection(targetClass = RoleEnum.class)
+    @CollectionTable(name="user_roles", joinColumns = @JoinColumn(name="id"))
     @Enumerated(EnumType.STRING)
-    private InventorRoleEnum role;
+    @Column(name = "user_role")
+    private Set<RoleEnum> roles;
 
     @Embedded
     private Address address;
