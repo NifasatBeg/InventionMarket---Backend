@@ -1,6 +1,6 @@
 package com.personal.InventionMarket.model.enums;
 
-public enum InventorRoleEnum {
+public enum RoleEnum {
     INVENTOR,
     BUSINESS
 }

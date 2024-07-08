@@ -2,22 +2,22 @@ package com.personal.InventionMarket.utility.mapper;
 
 import com.personal.InventionMarket.dto.UserDTO;
 import com.personal.InventionMarket.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-    public static User mapToUser(UserDTO userDTO){
+    public static User userDtoToUser(PasswordEncoder passwordEncoder, UserDTO userDTO){
         return User.builder().userId(userDTO.getUserId())
                 .username(userDTO.getUsername())
-                .hashedPassword(userDTO.getPassword())
+                .hashedPassword(userDTO.getPassword() != null ? passwordEncoder.encode(userDTO.getPassword()) : null)
                 .email(userDTO.getEmail())
                 .phone(userDTO.getPhone())
+                .roles(userDTO.getRoles())
                 .interestedCategories(userDTO.getInterestedCategories())
-                .role(userDTO.getRole())
                 .address(userDTO.getAddress())
                 .build();
-
     }
 
     public static User mapSrcUserToTargetUser(User srcUser, User targetUser) {
@@ -33,9 +33,6 @@ public class UserMapper {
         if (srcUser.getPhone() != null) {
             targetUser.setPhone(srcUser.getPhone());
         }
-        if (srcUser.getRole() != null) {
-            targetUser.setRole(srcUser.getRole());
-        }
         if (srcUser.getAddress() != null) {
             targetUser.setAddress(srcUser.getAddress());
         }
@@ -45,6 +42,10 @@ public class UserMapper {
         if(srcUser.getInterestedCategories() != null){
             targetUser.setInterestedCategories(srcUser.getInterestedCategories());
         }
+        if(srcUser.getRoles() != null){
+            targetUser.setRoles(srcUser.getRoles());
+        }
+
         return targetUser;
     }
 
