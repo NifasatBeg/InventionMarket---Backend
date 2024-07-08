@@ -20,7 +20,7 @@ public class Invention {
     private String inventionName;
     private String inventionDescription;
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private Inventor inventor;
 

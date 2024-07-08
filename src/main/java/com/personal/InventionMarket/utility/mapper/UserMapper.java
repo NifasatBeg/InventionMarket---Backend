@@ -11,7 +11,7 @@ public class UserMapper {
     public static User userDtoToUser(PasswordEncoder passwordEncoder, UserDTO userDTO){
         return User.builder().userId(userDTO.getUserId())
                 .username(userDTO.getUsername())
-                .hashedPassword(passwordEncoder.encode(userDTO.getPassword()))
+                .hashedPassword(userDTO.getPassword() != null ? passwordEncoder.encode(userDTO.getPassword()) : null)
                 .email(userDTO.getEmail())
                 .phone(userDTO.getPhone())
                 .roles(userDTO.getRoles())
